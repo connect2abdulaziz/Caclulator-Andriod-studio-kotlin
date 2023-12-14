@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -32,10 +33,14 @@ class LoginActivity : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
-        emailEditText = findViewById(R.id.emailEditText)
-        passwordEditText = findViewById(R.id.passwordEditText)
-        loginButton = findViewById(R.id.loginButton)
-        signupTextView = findViewById(R.id.signupTextView)
+        emailEditText = findViewById(R.id.email)
+        passwordEditText = findViewById(R.id.password)
+        loginButton = findViewById(R.id.login_btn)
+        signupTextView = findViewById(R.id.signup_text)
+        val back : ImageView = findViewById(R.id.back)
+        back.setOnClickListener{
+            startActivity(Intent(this, MainActivity::class.java))
+        }
 
         loginButton.setOnClickListener {
             loginUser()
@@ -75,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
                         writeToDatabase(userId, userData)
 
                         // Proceed to the main app screen or perform other actions
-                        startActivity(Intent(this, MainActivity::class.java))
+                        startActivity(Intent(this, StudentRegistrationActivity::class.java))
                         finish()
                     } else {
                         // Handle the case where the user is not authenticated
